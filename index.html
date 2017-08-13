@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        * {	
+            margin: 0;
+            padding: 0;
+        }
+      
+
+        canvas {
+            border: 1px solid gray;
+            box-shadow: 10px 10px 220px 20px chartreuse inset;  
+            
+            
+        }
+    </style>
+    <title>document</title>
+</head>
+
+<body>
+    <div>
+        
+    </div>
+    <canvas id="canvas" width="600" height="400"></canvas>
+</body>
+<script>
+    var canvas = document.querySelector('can vas');
+    var ctx = canvas.getContext('2d');
+    
+    var startTime=new Date();
+    var finishTime=4;
+
+    function draw() {
+         ctx.save();
+         ctx.clearRect(0,0,canvas.width,canvas.height)
+         ctx.translate(300,200);
+         var currentTime=new Date();
+         var deltaTime=(currentTime-startTime)/1000;
+         var percent=deltaTime/finishTime;
+         var radian=360*percent/180*Math.PI;
+        // if (radian>=2*Math.PI) {
+        //     return;
+            
+        // }
+
+        // 随机颜色生产
+        var color1=Math.ceil(Math.random()*255);
+        var color2=Math.ceil(Math.random()*255);
+        var color3=Math.ceil(Math.random()*255);
+
+
+        //  画扇形
+        ctx.beginPath()
+        ctx.arc(0,0,130,0,radian)
+        ctx.lineTo(0,0);
+        ctx.closePath();
+        ctx.fillStyle="rgb("+color1+","+color2+","+color3+")";
+        ctx.fill();
+
+        ctx.restore()
+        /* 回调 */
+        window.requestAnimationFrame(draw);
+        
+    }
+   
+    draw();
+
+</script>
+</html>
